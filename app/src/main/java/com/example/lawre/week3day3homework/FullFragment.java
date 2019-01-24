@@ -52,7 +52,7 @@ public class FullFragment extends Fragment
         super.onDetach();
     }
 
-    public void setText(String img, String name, String email, String password, String dob, String phone, String street, String city, String state, String post, String time)
+    public void setData(String img, String name, String email, String password, String dob, String phone, String street, String city, String state, String post, String time)
     {
         Glide.with(myImage.getContext()).load(img).into(myImage);
         tvName.setText(name);

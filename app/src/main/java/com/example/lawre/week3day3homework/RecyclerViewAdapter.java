@@ -20,7 +20,6 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
 {
     ArrayList<Result> userList;
-    FragmentManager fm;
 
     public RecyclerViewAdapter(ArrayList<Result> userList) {
         this.userList = userList;
@@ -76,13 +75,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View v)
         {
+            //Log.d("CLICK_", "onClick: " + tvName.getText());
             Intent intent = new Intent(v.getContext(),DisplayFull.class);
             for(int i = 0; i< userList.size();i++)
             {
                 String fullName = userList.get(i).getName().getFullName();
                 if(tvName.equals(fullName))
                 {
-
+                    intent.putExtra("image",userList.get(i).getPicture().getLarge());
+                    intent.putExtra("name",userList.get(i).getName().getFullName());
+                    intent.putExtra("email",userList.get(i).getEmail());
+                    intent.putExtra("password",userList.get(i).getLogin().getPassword());
+                    intent.putExtra("dob",userList.get(i).getDob());
+                    intent.putExtra("phone",userList.get(i).getPhone());
+                    intent.putExtra("street",userList.get(i).getLocation().getStreet());
+                    intent.putExtra("city",userList.get(i).getLocation().getStreet());
+                    intent.putExtra("state",userList.get(i).getLocation().getState());
+                    intent.putExtra("post",userList.get(i).getLocation().getPostcode());
+                    intent.putExtra("zone",userList.get(i).getLocation().getTimezone().getDescription());
+                    v.getContext().startActivity(intent);
                 }
             }
         }
@@ -103,10 +114,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             addSUserResponse(useres.get(i));
         }
-    }
-
-    public void setFragManager(FragmentManager fragmentManager)
-    {
-        fm = fragmentManager;
     }
 }
